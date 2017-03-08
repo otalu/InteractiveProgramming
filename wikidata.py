@@ -7,8 +7,6 @@ Authors = Anupama Krishnan, Onur Talu, Evan New-Schmidt
 
 from bs4 import BeautifulSoup
 import urllib
-import string
-import wikipedia
 
 
 def get_dictionary(country):
@@ -28,22 +26,13 @@ def get_dictionary(country):
 def get_capital(country):
     dictOfEntries = get_dictionary(country)
     if 'Capital' in dictOfEntries:
-        print(dictOfEntries['Capital'])
+        print(dictOfEntries['Largest City'])
     if 'Capital and largest city' in dictOfEntries:
         print(dictOfEntries['Capital and largest city'])
     else:
         print(dictOfEntries)
 
 
-"""
-for anchor in soup.find_all('table'):
-    print(anchor.get('href'))
-
-
-def get_capital(infobox):
-    print(infobox)
-    capital = soup.find('')
-"""
 if __name__ == "__main__":
-    country = 'Sweden'
+    country = 'Iceland'
     get_capital(country)
