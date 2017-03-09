@@ -1,22 +1,33 @@
 """
-Parses through the Wikipedia pages of countries and returns a dictionary of
-their capitals.
+Makes a 10 questions long trivia game that asks what the capital of a country
+is and then gives three random capitals along with the right one in a
+randomized order.
+Every correct answer is 10 and every false answer is -10 points. Game doesn't
+continue unless each question is answered correctly.
+It takes the capital-country information from a dictionary in the
+script countries.py.
 
 Authors = Anupama Krishnan, Onur Talu
 """
 
-import tkinter
+import tkinter  # imports the gui package
 from tkinter import *
 from tkinter import messagebox
 import random
 import countries
 
 
-distance = 0
-wrong = 0
+wrong = 0  # sets the initial number of wrong answered to 0
+qno = 1  # sets the initial value for the question number to 1
 
 
 def game():
+    """
+    Main game function.
+    Takes in the dictCapitals from countries.py
+    Creates a window with a question, four choices for the question and
+    the current score of the player.
+    """
     dictCapitals = countries.dictCountries
     country = random.choice(list(dictCapitals.keys()))
 
@@ -24,16 +35,19 @@ def game():
     window.title("Do you know your capitals?")
     window.geometry("500x250")
 
-    asktext = "What is the capital of %s?" % country
+    asktext = "%s) What is the capital of %s?" % (qno, country)
     question = tkinter.Label(window, text=asktext)
     question.place(x=5, y=5)
 
     def result(txt):
-        global distance
-        global wrong
+        """
+        Compares the answer input by the user and the correct answer. If the
+        number of questions asked is less than 10, it asks another question.
+        """
+        global wrong, qno
         if txt == dictCapitals[country]:
-            distance += 1
-            if distance < 10:
+            qno += 1
+            if qno <= 10:
                 restart()
             else:
                 msg = messagebox.showinfo('Congratulations', "Your Final Score is %s" % score)
@@ -45,18 +59,28 @@ def game():
             wrong += 1
 
     def restart():
+        """
+        Asks another question when called.
+        """
         msg = messagebox.showinfo('YES!', "You're Right")
         window.destroy()
         game()
 
     def choose_correct():
+        """
+        Chooses a random number to be the correct answer, so that the correct
+        asnwer is not always e.g. the second choice.
+        """
         val = [0, 1, 2, 3]
         correct = random.choice(val)
         return correct
 
     def score():
+        """
+        Determines the score of the user.
+        """
         factor = 10
-        current = (distance - wrong) * factor
+        current = (qno - wrong - 1) * factor
         return current
 
     score = score()
