@@ -6,6 +6,10 @@ https://docs.google.com/document/d/1-3ZcPOLHGUnpiSpE5WCl1sT-4i-SBNAg9Lr0QL5cDXo/
 
 To run the code, place countries.py and capitals.py in the same directory, install the package Tkinter and then run capitals.py with python3.
 
+Write-Up:
+
+https://docs.google.com/document/d/1_WhY5DA10zgop9oIYLx3KvUUjkXUzPQDqK2WKxGVQ0E/edit?usp=sharing
+
 NAME
     capitals
 
